@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversation</title>
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .conversation {
+            text-align: center;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            function displayConversation() {
+                return new Promise(function (resolve, reject) {
+                    window.location.href = "https://tanimomor.onrender.com";
+                    
+                    var lines = [
+                        "<strong>Why is your page taking long?</strong>",
+                        "Because the site is temporarily on onrender free version. It will take 50 seconds for the first load then work smoothly from then.",
+                        "<strong>Why use onrender then?</strong>",
+                        "It got an automated github CI/CD pipeline that makes deployment faster for me.",
+                        "<strong>Why not make your own CI/CD pipeline?</strong>",
+                        "I am building one with AWS. But it's taking a while because I am practicing data science in Kaggle for the last few days to compete in competition.",
+                        "<strong>Is that on AWS free version too?</strong>",
+                        "Haha.. Yes it is.",
+                        "<strong>I see. Good luck.</strong>",
+                        "Thanks. Nice talking to you. Have a nice one, bye!"
+                    ];
+
+                    var i = 0;
+                    var conversationInterval = setInterval(function () {
+                        if (i < lines.length) {
+                            document.querySelector('.conversation').innerHTML += '<p>' + lines[i] + '</p>';
+                            i++;
+                        } else {
+                            clearInterval(conversationInterval);
+                            resolve();
+                        }
+                    }, 3000);
+                });
+            }
+
+            function startTimer() {
+                return new Promise(function (resolve, reject) {
+                    var timeLeft = 23; // Seconds
+                    var timerInterval = setInterval(function () {
+                        document.getElementById('countdown').innerText = 'Loading... ' + timeLeft + 's';
+                        timeLeft--;
+                        if (timeLeft < 0) {
+                            clearInterval(timerInterval);
+                            resolve();
+                        }
+                    }, 1000);
+                });
+            }
+
+            function displayFacts() {
+                return new Promise(function (resolve, reject) {
+                    var facts = [
+                        "Did you know? Honey never spoils.",
+                        "Did you know? A single cloud can weigh more than a million pounds.",
+                        "Did you know? Bananas are berries, but strawberries aren't.",
+                        "Did you know? There are more stars in the universe than grains of sand on all the Earth's beaches.",
+                        "Did you know? Octopuses have three hearts.",
+                        "Did you know? The Eiffel Tower can be 15 cm taller during the summer.",
+                        "Did you know? 20% of Earth's oxygen is produced by the Amazon rainforest.",
+                        "Did you know? Some cats are allergic to humans.",
+                        "Did you know? The majority of your brain is fat.",
+                        "Did you know? Butterflies can taste with their feet.",
+                        "Did you know? A day on Venus is longer than a year on Venus.",
+                        "Did you know? Polar bear skin is actually black.",
+                        "Did you know? There are more possible iterations of a game of chess than there are atoms in the known universe.",
+                        "Did you know? Koalas have fingerprints almost identical to human fingerprints.",
+                        "The page should load by this. If it does not contact me at: tanim.xy@proton.me"
+                    ];
+
+
+                    var i = 0;
+                    var factsInterval = setInterval(function () {
+                        if (i < facts.length) {
+                            document.querySelector('.conversation').innerHTML += '<p>' + facts[i] + '</p>';
+                            i++;
+                        } else {
+                            clearInterval(factsInterval);
+                            resolve();
+                        }
+                    }, 3000);
+                });
+            }
+
+            displayConversation().then(function () {
+                document.querySelector('.conversation').innerHTML = ''; // Clear conversation
+                displayFacts();
+                startTimer();
+            });
+        };
+    </script>
+</head>
+
+<body>
+    <div id="countdown"></div>
+    <div class="conversation">
+        <p>I am redirecting you to the original site.</p>
+    </div>
+</body>
+
+</html>
